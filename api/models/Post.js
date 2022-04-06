@@ -36,6 +36,7 @@ class Post {
         return new Promise (async (resolve, reject) => {
             try {
                 let postData = await db.query(`INSERT INTO posts (title, name, body) VALUES ($1, $2, $3), RETURNING *;`, [title, name, body]);
+                let post = new Post(postData.rows[0]);
                 resolve(post);
             } catch (err){
                 reject ('Post could not be created');
