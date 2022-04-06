@@ -2,6 +2,7 @@ const modal = document.querySelector('#modal');
 const modalHeader = modal.querySelector('h2');
 const modalContent = modal.querySelector('article');
 const modalExit = modal.querySelector('i a');
+const {getAll, getItem, makePost} = require('/requests');
 
 //no idea what any of the above mean
 
@@ -15,7 +16,12 @@ const fields = [
 async function loadModalFor() {
     modalContent.innerHTML = '';
     modal.style.display = 'block';
-    renderNewPostForm();
+    if (id === 'new') { //don't quite get this
+        renderNewBookForm();
+    } else {
+        const data = await getItem(category, id);
+        category === 'books' ? renderBookModal(data) : renderAuthorModal(data);
+    }
 }
 
 function renderPostModal(post) {
@@ -37,7 +43,7 @@ function renderNewPostForm(){
         Object.entries(f.attributes).forEach(([a, v]) => field.setAttribute(a, v))
         form.appendChild(field);
     })
-    form.onsubmit = postBook; //where does this link to
+    form.onsubmit = makePost; //this links to requests.js
     modalContent.appendChild(form);
     modalExit.href = `#posts`;
 }
@@ -49,3 +55,6 @@ function createItemLink(data){
     link.textContent = data.name || data.title;
     return link;
 }
+
+
+

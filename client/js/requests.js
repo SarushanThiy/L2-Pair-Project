@@ -1,6 +1,6 @@
-async function getAll(category){
+async function getAll(){
     try {
-        const response = await fetch(`http://localhost:3000/${category}`);
+        const response = await fetch(`http://localhost:3000/posts/`);
         const data = await response.json()
         return data;
     } catch (err) {
@@ -8,9 +8,9 @@ async function getAll(category){
     }
 }
 
-async function getItem(category, id) {
+async function getItem(id) {
     try {
-        const response = await fetch(`http://localhost:3000/${category}/${id}`);
+        const response = await fetch(`http://localhost:3000/posts/${id}`);
         const data = await response.json();
         return data;
     } catch (err) {
@@ -27,7 +27,7 @@ async function makePost(e){
             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
         }
         
-        const response = await fetch('http://localhost:3000/posts', options);
+        const response = await fetch('http://localhost:3000/posts/', options); 
         const { id, err } = await response.json();
         if(err) { 
             throw Error(err) 
@@ -40,14 +40,4 @@ async function makePost(e){
 }
 
 
-//not needed
-/* async function deletePost(id){
-    try {
-        const options = { method: 'DELETE' }
-        await fetch(`http://localhost:3000/posts/${id}`, options);
-        window.location.hash = `#posts`
-    } catch (err) {
-        console.warn(err);
-    }
-} */
-
+module.exports = { getAll, getItem, makePost }
