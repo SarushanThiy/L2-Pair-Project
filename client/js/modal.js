@@ -8,7 +8,7 @@ const {getAll, getItem, makePost} = require('/requests');
 
 const fields = [
     { tag: 'input', attributes: { type: 'text', name: 'title', placeholder: 'Title' } },
-    { tag: 'input', attributes: { type: 'text', name: 'name', placeholder: 'Name' } },
+    { tag: 'input', attributes: { type: 'text', name: 'pname', placeholder: 'Name' } },
     { tag: 'textarea', attributes: { name: 'postContent', placeholder: 'content' } },
     { tag: 'input', attributes: { type: 'submit', value: 'Add Post' } }
 ]
@@ -17,16 +17,20 @@ async function loadModalFor() {
     modalContent.innerHTML = '';
     modal.style.display = 'block';
     if (id === 'new') { //don't quite get this
-        renderNewBookForm();
+        renderNewPostForm();
     } else {
-        const data = await getItem(category, id);
-        category === 'books' ? renderBookModal(data) : renderAuthorModal(data);
+        renderPostModal(data) 
     }
 }
 
+/*    } else {
+        const data = await getItem(category, id);
+        category === 'books' ? renderBookModal(data) : renderAuthorModal(data);
+    } */
+
 function renderPostModal(post) {
-    modalHeader.textContent = `${post.title} - ${post.name}`;
-    const nameLink = createItemLink(post.name);
+    modalHeader.textContent = `${post.title} - ${post.pname}`;
+    const nameLink = createItemLink(post.pname);
     const postContent = document.createElement('p');
     postContent.textContent = post.postContent;
     modalContent.appendChild(nameLink);
@@ -52,7 +56,7 @@ function createItemLink(data){
     console.log(data);
     const link = document.createElement('a');
     link.href = `#${data.path.substring(1)}`;
-    link.textContent = data.name || data.title;
+    link.textContent = data.pname || data.title;
     return link;
 }
 
