@@ -1,6 +1,6 @@
-INSERT INTO posts (title, pseudonym , body)
+INSERT INTO posts (title, pname , body)
 VALUES 
 (' Futureproof', 'Sarushan', 'We are so happy at futureproof'),
 
-('Life is good', 'Evie', 'We are so happy');
+('Cablegram', 'Evie', 'Where is my damn duck?');
 
