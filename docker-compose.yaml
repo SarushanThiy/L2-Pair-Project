@@ -6,11 +6,10 @@ services:
     ports: 
       - 3000:3000
     environment: 
-      - PORT=3000
       - PGUSER=futureproof
       - PGHOST=db
-      - PGPASSWORD=futurebook_password
-      - PGDATABASE=futurebook
+      - PGPASSWORD=cablegram_password
+      - PGDATABASE=cablegram
       - PGPORT=5432
     depends_on:
       - db
@@ -18,18 +17,16 @@ services:
       - type: bind
         source: ./api
         target: /code
-    command: bash -c "npm install && npm start"
+    command: bash -c "npm install && npm run seedDev && npm run dev"
   db:
-    image: 'postgres'
-    expose:
-      - "5432"
+    image: postgres:latest
     volumes:
       - "dbdata:/var/lib/postgresql/data"
       - "./db/setup/:/docker-entrypoint-initdb.d/:ro"
     environment: 
-      - POSTGRES_DB=futurebook
+      - POSTGRES_DB=cablegram
       - POSTGRES_USER=futureproof
-      - POSTGRES_PASSWORD=futurebook_password
+      - POSTGRES_PASSWORD=cablegram_password
   volumes:
      dbdata: 
     
