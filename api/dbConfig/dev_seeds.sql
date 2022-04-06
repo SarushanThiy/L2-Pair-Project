@@ -1,4 +1,4 @@
-INSERT INTO posts (title, name, body)
+INSERT INTO posts (title, pseudonym , body)
 VALUES 
 (' Futureproof', 'Sarushan', 'We are so happy at futureproof'),
 
