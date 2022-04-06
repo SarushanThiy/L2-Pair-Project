@@ -27,6 +27,8 @@ async function create (req, res) {
     }
 }
 
+module.exports = {index, show, create}
+
 //not needed
 /* async function destroy (req, res) {
     try {
