@@ -38,3 +38,6 @@ A site were you can post your thoughts in a anonymous way with a title, pseudony
 - HTML and CSS updates
 
 ### Challenges
+
+- Front end works but have to post functionality
+- Backend is currently not receiving info from tables
