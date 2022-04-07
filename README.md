@@ -1,11 +1,20 @@
-# Cablegram - ()
+# Cablegram
+
+## By Evie and Sarushan
 
 A site were you can post your thoughts in a anonymous way with a title, pseudonym and body.
 
 ## Installation and Usage
 
+### Installation
+
 - Clone or download the repo
 - Input `docker compose up` in terminal to initialize packages and open ports.
+
+### Usage
+
+- To run the program, run the command above and go to `localhost:8080`
+- To remove all docker volumes and containers run `docker compose down --volumes --remove-orphans`
 
 ## Technologies
 
