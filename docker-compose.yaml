@@ -1,0 +1,46 @@
+version: '3'
+services:
+  client:
+    container_name: client
+    build: ./client
+    image: debug_client
+    ports: 
+      - 8080:8080
+    working_dir: /code
+    volumes:
+      - type: bind
+        source: ./client
+        target: /code
+    command: [ "http-server" ]
+  api:
+    image: 'node:12.18.4'
+    working_dir: /server
+    ports:
+      - 3000:3000
+    environment: 
+      - PORT=3000
+      - PGUSER=cablegram
+      - PGHOST=db
+      - PGPASSWORD=cablegram_password
+      - PGDATABASE=cablegram
+      - PGPORT=5432
+    depends_on: 
+      - db
+    volumes:
+      - type: bind
+        source: ./api
+        target: /server
+    command: bash -c "npm install && npm start"
+  db:
+    image: 'postgres:12.4'
+    expose:
+      - "5432"
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+      - "./db/setup/:/docker-entrypoint-initdb.d/:ro"
+    environment: 
+      - POSTGRES_DB=cablegram
+      - POSTGRES_USER=cablegram
+      - POSTGRES_PASSWORD=cablegram_password
+volumes:
+  dbdata:
