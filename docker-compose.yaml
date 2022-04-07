@@ -39,7 +39,7 @@ services:
       - "dbdata:/var/lib/postgresql/data"
       - "./db/setup/:/docker-entrypoint-initdb.d/:ro"
     environment: 
-      - POSTGRES_DBcablegram
+      - POSTGRES_DB=cablegram
       - POSTGRES_USER=cablegram
       - POSTGRES_PASSWORD=cablegram_password
 volumes:
